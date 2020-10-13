@@ -1,5 +1,9 @@
 import express from 'express';
+import { join } from 'path';
+import cors from 'cors';
+import helmet from 'helmet';
 import bodyParser from 'body-parser';
+import 'express-async-errors';
 import 'reflect-metadata';
 import 'dotenv/config';
 
@@ -16,8 +20,14 @@ class App {
   }
 
   middlewares() {
+    this.app.use(cors());
+    this.app.use(helmet());
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
+    this.app.use(
+      '/uploads/images',
+      express.static(join(__dirname, '..', 'uploads', 'images')),
+    );
   }
 
   routes() {

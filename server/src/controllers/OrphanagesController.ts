@@ -2,16 +2,18 @@ import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import OrphanagesModel from '../models/OrphanagesModel';
 
+import orphanageView from '../views/orphanages_view';
+
 class OrphanagesController {
   async Index(req: Request, res: Response) {
     try {
       const orphanagesRepository = getRepository(OrphanagesModel);
 
-      const orphanages = await orphanagesRepository.find();
-
-      return res.json({
-        orphanages: orphanages,
+      const orphanages = await orphanagesRepository.find({
+        relations: ['images'],
       });
+
+      return res.json(orphanageView.renderMany(orphanages));
     } catch (e) {
       return res.status(400).json({
         errors: {
@@ -75,14 +77,11 @@ class OrphanagesController {
     try {
       const orphanagesRepository = getRepository(OrphanagesModel);
 
-      const orphanage = await orphanagesRepository.findOneOrFail(id);
-
-      return res.status(200).json({
-        success: {
-          message: 'Orfanato encontrado com com sucesso',
-          data: orphanage,
-        },
+      const orphanage = await orphanagesRepository.findOneOrFail(id, {
+        relations: ['images'],
       });
+
+      return res.status(200).json(orphanageView.render(orphanage));
     } catch (e) {
       return res.status(400).json({
         errors: {
