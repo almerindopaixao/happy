@@ -22,18 +22,24 @@ class OrphanagesController {
     }
   }
   async Store(req: Request, res: Response) {
-    const {
-      name,
-      latitude,
-      longitude,
-      about,
-      instructions,
-      opening_hours,
-      open_on_weekends,
-    } = req.body;
-
     try {
       const orphanagesRepository = getRepository(OrphanagesModel);
+
+      const {
+        name,
+        latitude,
+        longitude,
+        about,
+        instructions,
+        opening_hours,
+        open_on_weekends,
+      } = req.body;
+
+      const requestImages = req.files as Express.Multer.File[];
+
+      const images = requestImages.map((images) => {
+        return { path: images.filename };
+      });
 
       const orphanage = orphanagesRepository.create({
         name,
@@ -43,6 +49,7 @@ class OrphanagesController {
         instructions,
         opening_hours,
         open_on_weekends,
+        images: images,
       });
 
       await orphanagesRepository.save(orphanage);
@@ -54,7 +61,7 @@ class OrphanagesController {
         },
       });
     } catch (e) {
-      return res.status(401).json({
+      return res.status(400).json({
         errors: {
           message: 'Erro ao cadastrar orfanato',
           error: e,

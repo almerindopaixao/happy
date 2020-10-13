@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import OrphanagesController from '../controllers/OrphanagesController';
+import ImagesMiddleware from '../middlewares/ImagesMiddleware';
 
 class OrphanageRoutes {
   public router: Router = Router();
@@ -11,7 +12,7 @@ class OrphanageRoutes {
 
   routes() {
     this.router.get('/', OrphanagesController.Index);
-    this.router.post('/', OrphanagesController.Store);
+    this.router.post('/', ImagesMiddleware, OrphanagesController.Store);
     this.router.get('/:id', OrphanagesController.Show);
   }
 }
