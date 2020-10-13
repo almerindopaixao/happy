@@ -1,5 +1,12 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
+import * as Yup from 'yup';
+import { ValidationError } from 'yup';
+
+interface ValidationErrors {
+  [key: string]: string[];
+}
+
 import OrphanagesModel from '../models/OrphanagesModel';
 
 import orphanageView from '../views/orphanages_view';
@@ -43,7 +50,7 @@ class OrphanagesController {
         return { path: images.filename };
       });
 
-      const orphanage = orphanagesRepository.create({
+      const data = {
         name,
         latitude,
         longitude,
@@ -52,7 +59,28 @@ class OrphanagesController {
         opening_hours,
         open_on_weekends,
         images: images,
+      };
+
+      const schema = Yup.object().shape({
+        name: Yup.string().required('Nome precisa ser enviado'),
+        latitude: Yup.number().required('Latitude precisa ser enviada'),
+        longitude: Yup.number().required('Longitude precisa ser enviada'),
+        about: Yup.string().required('Sobre precisa ser enviado').max(300),
+        instructions: Yup.string().required(),
+        opening_hours: Yup.string().required(),
+        open_on_weekends: Yup.boolean().required(),
+        images: Yup.array(
+          Yup.object().shape({
+            path: Yup.string().required(),
+          }),
+        ),
       });
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+
+      const orphanage = orphanagesRepository.create(data);
 
       await orphanagesRepository.save(orphanage);
 
@@ -62,12 +90,20 @@ class OrphanagesController {
           data: orphanage,
         },
       });
-    } catch (e) {
+    } catch (error) {
+      const errors: ValidationErrors = {};
+
+      if (error instanceof ValidationError) {
+        error.inner.forEach((err) => {
+          errors[err.path] = err.errors;
+        });
+      }
+
+      console.log(error);
+
       return res.status(400).json({
-        errors: {
-          message: 'Erro ao cadastrar orfanato',
-          error: e,
-        },
+        message: 'Erro ao cadastrar orfanato',
+        errors,
       });
     }
   }

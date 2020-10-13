@@ -10,6 +10,7 @@ import 'dotenv/config';
 import './database/connection';
 
 import OrphanageRoutes from './routes/OrphanagesRoutes';
+import errorHandle from './errors/handler';
 
 class App {
   public app = express();
@@ -20,6 +21,7 @@ class App {
   }
 
   middlewares() {
+    this.app.use(errorHandle);
     this.app.use(cors());
     this.app.use(helmet());
     this.app.use(bodyParser.json());
