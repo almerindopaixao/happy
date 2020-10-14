@@ -1,14 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Map, TileLayer } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 
-import { FiPlus } from 'react-icons/fi';
+import { FiPlus, FiArrowRight } from 'react-icons/fi';
+
+import LeaFlet from 'leaflet';
 
 import 'leaflet/dist/leaflet.css';
-import './OrphanagesMap.css';
+import './styles.css';
 
 import mapMarketImg from '../../assets/images/map-market.svg';
+
+const mapIcon = LeaFlet.icon({
+  iconUrl: mapMarketImg,
+  iconSize: [48, 48],
+  iconAnchor: [28, 48],
+  popupAnchor: [138, 10],
+});
 
 export default function OrphanagesMap(): JSX.Element {
   return (
@@ -18,7 +27,7 @@ export default function OrphanagesMap(): JSX.Element {
           <img src={mapMarketImg} alt="appy" />
 
           <h2>Escolha um orfanato no mapa</h2>
-          <p>Muitas crianças estão esperando a sua visita :)</p>
+          <p>Muitas crianças estão esperando a sua visita</p>
         </header>
 
         <footer>
@@ -35,9 +44,23 @@ export default function OrphanagesMap(): JSX.Element {
         <TileLayer
           url={`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
         />
+        <Marker icon={mapIcon} position={[-11.9467157, -38.0749409]}>
+          <Popup
+            closeButton={false}
+            minWidth={180}
+            maxWidth={200}
+            maxHeight={50}
+            className="map-popup"
+          >
+            Lar das meninas
+            <Link to="/orphanages/1">
+              <FiArrowRight size={15} color="#fff" />
+            </Link>
+          </Popup>
+        </Marker>
       </Map>
 
-      <Link to="#" className="create-orphanage">
+      <Link to="/orphanages/create" className="create-orphanage">
         <FiPlus size={32} color="#fff" />
       </Link>
     </div>
