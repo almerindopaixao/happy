@@ -7,7 +7,7 @@
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-licença">Licença</a>
-</p
+</p>
 
 <p align="center">
  <img src="https://img.shields.io/static/v1?label=PRs&message=welcome&color=FFD666&labelColor=000000" alt="PRs welcome!" />
