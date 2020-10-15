@@ -50,6 +50,8 @@ class OrphanagesController {
         return { path: images.filename };
       });
 
+      if (!open_on_weekends) return;
+
       const data = {
         name,
         latitude,
@@ -57,7 +59,7 @@ class OrphanagesController {
         about,
         instructions,
         opening_hours,
-        open_on_weekends,
+        open_on_weekends: open_on_weekends === 'true',
         images: images,
       };
 
@@ -66,8 +68,12 @@ class OrphanagesController {
         latitude: Yup.number().required('Latitude precisa ser enviada'),
         longitude: Yup.number().required('Longitude precisa ser enviada'),
         about: Yup.string().required('Sobre precisa ser enviado').max(300),
-        instructions: Yup.string().required(),
-        opening_hours: Yup.string().required(),
+        instructions: Yup.string().required(
+          'As instruções de visitação precisam ser enviadas',
+        ),
+        opening_hours: Yup.string().required(
+          'Você precisa enviar o horário de atendimento',
+        ),
         open_on_weekends: Yup.boolean().required(),
         images: Yup.array(
           Yup.object().shape({
