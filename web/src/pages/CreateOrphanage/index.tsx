@@ -75,7 +75,8 @@ export default function CreateOrphanage(): JSX.Element {
 
       history.push('/app');
     } catch (e) {
-      toast.error('Desculpe, Não conseguimos fazer o cadastro do orfanato :)');
+      toast.error('Desculpe, Não conseguimos fazer o cadastro do orfanato :(');
+      console.log(e);
     }
   }
 

@@ -50,8 +50,6 @@ class OrphanagesController {
         return { path: images.filename };
       });
 
-      if (!open_on_weekends) return;
-
       const data = {
         name,
         latitude,
