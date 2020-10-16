@@ -84,7 +84,6 @@ const OrphanagesMap = (): JSX.Element => {
             <Feather name="plus" size={20} color="#fff" />
           </RectButton>
         </View>
-
       <StatusBar style="auto" />
     </View>
   );
