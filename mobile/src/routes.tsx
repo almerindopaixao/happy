@@ -5,8 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import OrphanagesMap from './screens/OrphanagesMap';
 import OrphanageDetails from './screens/OrphanageDetails';
 
-import SelectMapPosition from './screens/CreateOrphanage/select';
-import OrphanageData from './screens/CreateOrphanage/data';
+import SelectMapPosition from './screens/CreateOrphanage/SelectMapPosition';
+import OrphanageData from './screens/CreateOrphanage/OrphanageData';
 
 import Header from './components/Header';
 
