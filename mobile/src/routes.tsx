@@ -5,6 +5,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import OrphanagesMap from './screens/OrphanagesMap';
 import OrphanageDetails from './screens/OrphanageDetails';
 
+import SelectMapPosition from './screens/CreateOrphanage/select';
+import OrphanageData from './screens/CreateOrphanage/data';
+
+import Header from './components/Header';
+
 export default function Routes(): JSX.Element {
 
   const { Screen, Navigator } = createStackNavigator();
@@ -12,7 +17,7 @@ export default function Routes(): JSX.Element {
   return (
     <NavigationContainer>
       <Navigator
-        screenOptions={{ headerShown: false }} initialRouteName="OrphanagesMap"
+        screenOptions={{ headerShown: false, cardStyle: { backgroundColor: '#f2f3f5' }}} initialRouteName="OrphanagesMap"
       >
         <Screen
           name="OrphanagesMap"
@@ -21,6 +26,26 @@ export default function Routes(): JSX.Element {
         <Screen
           name="OrphanageDetails"
           component={OrphanageDetails}
+          options={{
+            headerShown: true,
+            header: () => <Header showCancel={false} title="Orfanato" />
+          }}
+        />
+        <Screen
+          name="SelectMapPosition"
+          component={SelectMapPosition}
+          options={{
+            headerShown: true,
+            header: () => <Header title="Selecione no mapa" />
+          }}
+        />
+        <Screen
+          name="OrphanageData"
+          component={OrphanageData}
+          options={{
+            headerShown: true,
+            header: () => <Header title="Informe os dados" />
+          }}
         />
       </Navigator>
     </NavigationContainer>
