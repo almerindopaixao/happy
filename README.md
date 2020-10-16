@@ -14,6 +14,12 @@
  <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=FFD666&labelColor=000000" />
 </p>
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ff79c10a-ac78-41e8-8c31-1fab9e5f2618/deploy-status)](https://app.netlify.com/sites/happy-adocao/deploys)
+
+## :link: Links
+- [API](https://happy-apirest.herokuapp.com/orphanages)
+- [Site](https://happy-adocao.netlify.app/)
+
 ## 💻 Projeto
 
 O Happy é uma plataforma desenvolvida durante a semanas oministack da [Rocketseat](https://github.com/rocketseat-education) que tem o intuito de conectar pessoas com orfanatos próximos :)
