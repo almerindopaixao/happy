@@ -51,7 +51,7 @@ export default function Orphanage(): JSX.Element {
       <Sidebar />
       <main>
         <div className="orphanage-details">
-          {orphanage.images.length > 0 && (
+          {orphanage.images.length > 0 ? (
             <>
               <img
                 src={orphanage.images[activeImageIndex].url}
@@ -75,6 +75,8 @@ export default function Orphanage(): JSX.Element {
                 })}
               </div>
             </>
+          ) : (
+            ''
           )}
 
           <div className="orphanage-details-content">
