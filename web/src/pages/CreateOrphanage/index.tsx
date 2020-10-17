@@ -3,6 +3,7 @@ import { Map, TileLayer, Marker } from 'react-leaflet';
 import { LeafletMouseEvent } from 'leaflet';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Switch from 'react-switch';
 
 import { FiPlus } from 'react-icons/fi';
 
@@ -12,6 +13,7 @@ import './styles.css';
 
 import Sidebar from '../../components/Sidebar';
 import api from '../../services/api';
+import whatsappNumberMask from '../../utils/whatsappNumberMask';
 
 export default function CreateOrphanage(): JSX.Element {
   const history = useHistory();
@@ -23,6 +25,7 @@ export default function CreateOrphanage(): JSX.Element {
   const [instructions, setInstructions] = useState('');
   const [opening_hours, setOpeningHours] = useState('');
   const [open_on_weekends, setOpenOnWeekends] = useState(true);
+  const [whatsapp, setWhatsapp] = useState('');
   const [images, setImages] = useState<File[]>([]);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
 
@@ -61,6 +64,7 @@ export default function CreateOrphanage(): JSX.Element {
       data.append('latitude', String(latitude));
       data.append('longitude', String(longitude));
       data.append('about', name);
+      data.append('whatsapp', whatsapp);
       data.append('instructions', instructions);
       data.append('opening_hours', opening_hours);
       data.append('open_on_weekends', String(open_on_weekends));
@@ -129,6 +133,22 @@ export default function CreateOrphanage(): JSX.Element {
             </div>
 
             <div className="input-block">
+              <label htmlFor="whatsapp">
+                Número do Whatsapp
+                <span>Não é necessário adicionar zero à frente do número</span>
+              </label>
+              <input
+                id="whatsapp"
+                placeholder="557599988XXXX"
+                value={whatsapp}
+                onChange={(e) => {
+                  if (e.target.value.length > 13) return;
+                  setWhatsapp(whatsappNumberMask(e.target.value));
+                }}
+              />
+            </div>
+
+            <div className="input-block">
               <label htmlFor="images">Fotos</label>
 
               <div className="images-container">
@@ -170,25 +190,14 @@ export default function CreateOrphanage(): JSX.Element {
               />
             </div>
 
-            <div className="input-block">
+            <div className="input-block switch">
               <label htmlFor="open_on_weekends">Atende fim de semana</label>
-
-              <div className="button-select">
-                <button
-                  type="button"
-                  className={open_on_weekends ? 'active' : ''}
-                  onClick={() => setOpenOnWeekends(true)}
-                >
-                  Sim
-                </button>
-                <button
-                  type="button"
-                  className={!open_on_weekends ? 'active' : ''}
-                  onClick={() => setOpenOnWeekends(false)}
-                >
-                  Não
-                </button>
-              </div>
+              <Switch
+                checked={open_on_weekends}
+                onChange={() => setOpenOnWeekends(!open_on_weekends)}
+                onColor="#3CDC8C"
+                height={20}
+              />
             </div>
           </fieldset>
 
@@ -200,5 +209,3 @@ export default function CreateOrphanage(): JSX.Element {
     </div>
   );
 }
-
-// return `https://a.tile.openstreetmap.org/${z}/${x}/${y}.png`;
