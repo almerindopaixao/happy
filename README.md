@@ -35,8 +35,48 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [Expo](https://expo.io/)
 
 ## :gear: Modificações
-- Implementação da validação de imagens (formato, tipo, tamanho) pela API utilizando o multer :ballot_box_with_check:
+
+#### Implementação da parte de cadastro do número do orfanato (criação da coluna whatsapp no banco de dados) e integração com o whatsapp tanto da versão web quanto da versão mobile
+- web:
+
+```typescript
+<div className="input-block">
+    <label htmlFor="whatsapp">
+        Número do Whatsapp
+        <span>Não é necessário adicionar zero à frente do número</span>
+    </label>
+    <input
+      id="whatsapp"
+      placeholder="557599988XXXX"
+      value={whatsapp}
+      onChange={(e) => {
+         if (e.target.value.length > 13) return;
+         setWhatsapp(whatsappNumberMask(e.target.value));
+       }}
+     />
+</div>
+
+export default function whatsappNumberMask(number: string): string {
+  return number.replace(/\D/g, '');
+}
 ```
+- mobile
+
+```typescript
+<Text style={styles.label}>Whatsapp</Text>
+<TextInput
+   style={styles.input}
+   placeholder="557599988XXXX"
+   keyboardType="numeric"
+   maxLength={13}
+   value={data.whatsapp}
+   onChangeText={(text) => {
+      setData({ ...data, whatsapp: text})
+   }}
+/>
+```
+#### Implementação da validação de imagens (formato, tipo, tamanho) pela API utilizando o multer :ballot_box_with_check:
+```typescript
 fileFilter: (req, file, cb) => {
     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
       return cb(
@@ -54,8 +94,8 @@ fileFilter: (req, file, cb) => {
     fileSize: 1024 * 1024,
   },
   ```
-- Utilização do banco de dados postgresql :elephant:
-```
+#### Utilização do banco de dados postgresql :elephant:
+```json
 {
   "type": "postgres",
   "host": "localhost",
