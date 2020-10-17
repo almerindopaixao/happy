@@ -36,7 +36,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## :gear: Modificações
 
-#### Implementação da parte de cadastro do número do orfanato (criação da coluna whatsapp no banco de dados) e integração com o whatsapp tanto da versão web quanto da versão mobile
+#### :pushpin: Implementação da parte de cadastro do número do orfanato (criação da coluna whatsapp no banco de dados) e integração com o whatsapp tanto da versão web quanto da versão mobile
 - web:
 
 ```typescript
@@ -75,7 +75,7 @@ export default function whatsappNumberMask(number: string): string {
    }}
 />
 ```
-#### Implementação da validação de imagens (formato, tipo, tamanho) pela API utilizando o multer :ballot_box_with_check:
+#### :pushpin: Implementação da validação de imagens (formato, tipo, tamanho) pela API utilizando o multer :ballot_box_with_check:
 ```typescript
 fileFilter: (req, file, cb) => {
     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
@@ -94,7 +94,7 @@ fileFilter: (req, file, cb) => {
     fileSize: 1024 * 1024,
   },
   ```
-#### Utilização do banco de dados postgresql :elephant:
+#### :pushpin: Utilização do banco de dados postgresql :elephant:
 ```json
 {
   "type": "postgres",
@@ -114,7 +114,7 @@ fileFilter: (req, file, cb) => {
   }
 }
 ```
-### Substituição de botões para um switch
+### :pushpin: Substituição dos botões para um interruptor (switch)
 
 ![Switch](https://github.com/almerindopaixao/happy/blob/main/.github/modificacaoSwitch.png)
 
