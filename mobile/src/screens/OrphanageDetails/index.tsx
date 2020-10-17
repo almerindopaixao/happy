@@ -62,22 +62,23 @@ export default function OrphanageDetails() {
   return (
     <ScrollView style={styles.container}>
         {orphanage.images.length > 0 ? (
-          orphanage.images.map((image) => {
-            return (
-              <View style={styles.imagesContainer}>
-                <ScrollView horizontal pagingEnabled>
-                  <Image
-                    key={image.id}
-                    style={styles.image}
-                    source={{ uri: replaceLocalhost(image.url) }}
-                  />
-                </ScrollView>
-              </View>
-            );
-          })
-        ) : (
-          null
-        )}
+          <View style={styles.imagesContainer}>
+            <ScrollView horizontal pagingEnabled>
+              {orphanage.images.map((image) => {
+                return (
+                    <Image
+                      key={image.id}
+                      style={styles.image}
+                      source={{ uri: replaceLocalhost(image.url) }}
+                    />
+                );
+              })}
+            </ScrollView>
+          </View>
+          ) : (
+            null
+          )
+        }
 
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{orphanage.name}</Text>

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { ScrollView, View, Switch, Text, TextInput, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Switch, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { RectButton } from 'react-native-gesture-handler';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
+import * as ImagePicker from 'expo-image-picker';
 
 import styles from './styles';
+import api from '../../../services/api';
 
 interface Params {
   position: {
@@ -17,6 +19,8 @@ interface Params {
 export default function OrphanageData() {
   const route = useRoute();
 
+  const { navigate } = useNavigation();
+
   const [data, setData] = useState({
     name: '',
     about: '',
@@ -25,7 +29,61 @@ export default function OrphanageData() {
     open_on_weekends: true,
   });
 
+  const [images, setImages] = useState<string[]>([]);
+
   const params = route.params as Params;
+
+  async function handleCreateOrphanage() {
+    const { latitude, longitude } = params.position;
+
+    const registers = new FormData();
+
+    registers.append('name', data.name);
+    registers.append('about', data.about);
+    registers.append('instructions', data.instructions);
+    registers.append('latitude', String(latitude));
+    registers.append('longitude', String(longitude));
+    registers.append('open_on_weekends', String(data.open_on_weekends));
+    registers.append('opening_hours', data.opening_hours);
+
+    images.forEach((image, index) => {
+      registers.append('images', {
+        type: 'image/jpg',
+        uri: image,
+        name: `image_${index}.jpg`
+      } as any);
+    });
+    try {
+      await api.post('orphanages', registers);
+      navigate('OrphanagesMap');
+    } catch (e) {
+      alert('Desculpe, não conseguimos realizar o cadastro do orfanato');
+      console.log(e);
+    }
+  }
+
+  async function handleSelectImages() {
+    const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
+
+    if (status !== 'granted') {
+      alert('Eita, precisamos de acesso às suas fotos...');
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      quality: 1,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    })
+
+    if (result.cancelled) {
+      return;
+    }
+
+    const { uri: image } = result;
+
+    setImages([ ...images, image ]);
+  }
 
 
   return (
@@ -55,7 +113,20 @@ export default function OrphanageData() {
       */}
 
       <Text style={styles.label}>Fotos</Text>
-      <TouchableOpacity style={styles.imagesInput} onPress={() => {}}>
+
+      <View style={styles.uploadedImagesContainer}>
+        {images.map((image) => {
+          return (
+            <Image
+              key={image}
+              source={{ uri: image }}
+              style={styles.uploadedImage}
+            />
+          );
+        })}
+      </View>
+
+      <TouchableOpacity onPressIn={handleSelectImages} style={styles.imagesInput} onPress={() => {}}>
         <Feather name="plus" size={24} color="#15B6D6" />
       </TouchableOpacity>
 
@@ -85,7 +156,7 @@ export default function OrphanageData() {
         />
       </View>
 
-      <RectButton style={styles.nextButton} onPress={() => {}}>
+      <RectButton style={styles.nextButton} onPress={handleCreateOrphanage}>
         <Text style={styles.nextButtonText}>Cadastrar</Text>
       </RectButton>
     </ScrollView>
