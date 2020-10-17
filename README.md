@@ -22,7 +22,7 @@
 
 ## 💻 Projeto
 
-O Happy é uma plataforma desenvolvida durante a semanas oministack da [Rocketseat](https://github.com/rocketseat-education) que tem o intuito de conectar pessoas com orfanatos próximos :)
+O Happy é uma plataforma desenvolvida durante a Next Level Week #3 da [Rocketseat](https://github.com/rocketseat-education) que tem o intuito de conectar pessoas com orfanatos próximos :)
 
 
 ## 🚀 Tecnologias
@@ -33,6 +33,47 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [React](https://reactjs.org)
 - [React Native](https://facebook.github.io/react-native/)
 - [Expo](https://expo.io/)
+
+## :gear: Minhas Modificações
+- Implementação da validação de imagens (formato, tipo, tamanho) pela API utilizando o multer :ballot_box_with_check:
+```
+fileFilter: (req, file, cb) => {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+      return cb(
+        new multer.MulterError(
+          'LIMIT_UNEXPECTED_FILE',
+          'Os arquivos enviados precisam ser do formato png ou jpg',
+        ),
+      );
+    }
+
+    return cb(null, true);
+  },
+
+  limits: {
+    fileSize: 1024 * 1024,
+  },
+  ```
+- Utilização do banco de dados postgresql :elephant:
+```
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 0000,
+  "username": "username",
+  "password": "password",
+  "database": "database",
+  "migrations": [
+    "./src/database/migrations/*.ts"
+  ],
+  "entities": [
+    "./src/models/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "./src/database/migrations"
+  }
+}
+```
 
 ## :memo: Licença
 
