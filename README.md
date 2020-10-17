@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="happy" title="happy" src="https://github.com/almerindopaixao/happy/blob/main/web/src/assets/images/map-market.svg" />      
+  <img alt="happy" title="happy" src="https://github.com/almerindopaixao/happy/blob/main/.github/logo.svg" />      
 </p>
 
 <p align="center">
