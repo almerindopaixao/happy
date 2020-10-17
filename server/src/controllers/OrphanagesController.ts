@@ -11,6 +11,8 @@ import OrphanagesModel from '../models/OrphanagesModel';
 
 import orphanageView from '../views/orphanages_view';
 
+import replaceNumberOfWhatsapp from '../utils/replaceNumbeOfWhatsapp';
+
 class OrphanagesController {
   async Index(req: Request, res: Response) {
     try {
@@ -42,6 +44,7 @@ class OrphanagesController {
         instructions,
         opening_hours,
         open_on_weekends,
+        whatsapp,
       } = req.body;
 
       const requestImages = req.files as Express.Multer.File[];
@@ -59,6 +62,7 @@ class OrphanagesController {
         opening_hours,
         open_on_weekends: open_on_weekends === 'true',
         images: images,
+        whatsapp: replaceNumberOfWhatsapp(whatsapp),
       };
 
       const schema = Yup.object().shape({
@@ -69,6 +73,9 @@ class OrphanagesController {
         instructions: Yup.string().required(
           'As instruções de visitação precisam ser enviadas',
         ),
+        whatsapp: Yup.string()
+          .required('O número do orfanato precisa ser enviado')
+          .max(13),
         opening_hours: Yup.string().required(
           'Você precisa enviar o horário de atendimento',
         ),
