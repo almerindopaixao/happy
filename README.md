@@ -114,6 +114,9 @@ fileFilter: (req, file, cb) => {
   }
 }
 ```
+### Substituição de botões para um switch
+
+![Switch](https://github.com/almerindopaixao/happy/blob/main/.github/modificacaoSwitch.png)
 
 ## :memo: Licença
 
