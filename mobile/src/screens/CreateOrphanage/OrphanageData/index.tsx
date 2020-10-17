@@ -26,6 +26,7 @@ export default function OrphanageData() {
     about: '',
     instructions: '',
     opening_hours: '',
+    whatsapp: '',
     open_on_weekends: true,
   });
 
@@ -40,6 +41,7 @@ export default function OrphanageData() {
 
     registers.append('name', data.name);
     registers.append('about', data.about);
+    registers.append('whatsapp', data.whatsapp);
     registers.append('instructions', data.instructions);
     registers.append('latitude', String(latitude));
     registers.append('longitude', String(longitude));
@@ -105,12 +107,17 @@ export default function OrphanageData() {
         onChangeText={(text) => setData({ ...data, about: text })}
       />
 
-      {/*
       <Text style={styles.label}>Whatsapp</Text>
       <TextInput
         style={styles.input}
+        placeholder="557599988XXXX"
+        keyboardType="numeric"
+        maxLength={13}
+        value={data.whatsapp}
+        onChangeText={(text) => {
+          setData({ ...data, whatsapp: text})
+        }}
       />
-      */}
 
       <Text style={styles.label}>Fotos</Text>
 

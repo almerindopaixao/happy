@@ -146,7 +146,7 @@ export default function Orphanage(): JSX.Element {
               href={`https://wa.me/${orphanage.whatsapp}?text=Olá%20${orphanage.name}`}
               target="_blanck"
               className="contact-button"
-              rel="noopener"
+              rel="noopener noreferrer"
             >
               <FaWhatsapp size={20} color="#FFF" />
               Entrar em contato
