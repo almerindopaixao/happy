@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import { FaWhatsapp } from 'react-icons/fa';
+import { FaWhatsapp } from 'react-icons/fa';
 import { FiClock, FiInfo } from 'react-icons/fi';
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import { useParams } from 'react-router-dom';
@@ -19,6 +19,7 @@ interface Images {
 interface OrphanageInterface {
   name: string;
   about: string;
+  whatsapp: string;
   images: Images[];
   instructions: string;
   latitude: number;
@@ -141,13 +142,15 @@ export default function Orphanage(): JSX.Element {
                 </div>
               )}
             </div>
-
-            {/*
-            <button type="button" className="contact-button">
+            <a
+              href={`https://wa.me/${orphanage.whatsapp}?text=Olá%20${orphanage.name}`}
+              target="_blanck"
+              className="contact-button"
+              rel="noopener"
+            >
               <FaWhatsapp size={20} color="#FFF" />
               Entrar em contato
-            </button>
-            */}
+            </a>
           </div>
         </div>
       </main>
