@@ -26,7 +26,7 @@ const OrphanagesMap = (): JSX.Element => {
     api.get('/orphanages').then((response) => {
       setOrphanages(response.data);
     });
-  }, [])
+  });
 
   function handleNavigateToOrphanageDetails(id: number) {
     navigation.navigate('OrphanageDetails', { id });
