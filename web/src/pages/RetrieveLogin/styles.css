@@ -33,6 +33,15 @@ form.login-form fieldset legend {
   margin-bottom: 40px;
 }
 
+form.login-form fieldset .description {
+  color: #5C8599;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+
+  margin-bottom: 40px;
+}
+
 form.login-form .input-block + .input-block {
   margin-top: 24px;
 }
@@ -42,7 +51,7 @@ form.login-form .input-block label {
   line-height: 24px;
 }
 
-form.login-form .input-block input:not([type=checkbox]) {
+form.login-form .input-block input {
   width: 100%;
   background: #F5F8FA;
   border: 1px solid #D3E2E5;
@@ -53,59 +62,6 @@ form.login-form .input-block input:not([type=checkbox]) {
   height: 54px;
   min-width: 350px;
   padding: 0 24px;
-}
-
-form.login-form .input-block.remember {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-form.login-form .input-block.remember label {
-  width: 32%;
-  display: flex;
-  justify-content: space-between;
-  color: #8FA7B3;
-  font-size: 16px;
-  line-height: 22px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-
-form.login-form .input-block.remember label input {
-  all: unset;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 24px;
-  background: #F5F8FA;
-  border: 1px solid #D3E2E5;
-  border-radius: 8px;
-  box-sizing: border-box;
-  color: #F5F8FA;
-  cursor: pointer;
-}
-
-form.login-form .input-block.remember label input::before {
-  content: url(../../assets/images/checked.svg);
-}
-
-form.login-form .input-block.remember input:checked {
-  background: #37C77F;
-  border: 2px solid #37C77F;
-  box-sizing: border-box;
-  border-radius: 8px;
-}
-
-form.login-form .input-block.remember a {
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 22px;
-  color: #8FA7B3;
 }
 
 form.login-form button.confirm-button {

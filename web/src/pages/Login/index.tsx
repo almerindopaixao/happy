@@ -4,13 +4,14 @@ import { FiArrowLeft } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 
-import logoLogin from '../../assets/images/logoLogin.svg';
 import api from '../../services/api';
 import {
   setTokenLocalStorage,
   setTokenSessionStorage,
   token,
 } from '../../services/token';
+
+import SidebarLogin from '../../components/SidebarLogin';
 
 import './styles.css';
 
@@ -65,9 +66,15 @@ export default function Login(): JSX.Element {
         });
       }
 
-      e.response.data.errors.forEach((error: string) => {
-        toast.error(error);
-      });
+      if (e.response) {
+        e.response.data.errors.forEach((error: string) => {
+          toast.error(error);
+        });
+      }
+
+      if (e.isAxiosError) {
+        toast.error('Desculpe, Servidor indisponível no momento :(');
+      }
     }
   }
 
@@ -77,13 +84,7 @@ export default function Login(): JSX.Element {
 
   return (
     <div id="page-login">
-      <aside>
-        <img src={logoLogin} alt="Logo" />
-        <div className="location">
-          <strong>Entre-Rios</strong>
-          <span>Bahia</span>
-        </div>
-      </aside>
+      <SidebarLogin />
 
       <div className="content-form">
         <Link to="/" className="back-home">

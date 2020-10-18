@@ -9,6 +9,7 @@ import Orphanage from '../pages/Orphanage';
 import CreateOrphanageSuccess from '../pages/CreateOrphanageSuccess';
 import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
+import RetrieveLogin from '../pages/RetrieveLogin';
 
 export default function Routes(): JSX.Element {
   return (
@@ -23,6 +24,7 @@ export default function Routes(): JSX.Element {
         />
         <MyRoute path="/orphanages/:id" component={Orphanage} />
         <MyRoute exact path="/login" component={Login} />
+        <MyRoute exact path="/login/retrieve" component={RetrieveLogin} />
         <MyRoute exact path="/dashboard" isClosed component={Dashboard} />
       </Switch>
     </BrowserRouter>
