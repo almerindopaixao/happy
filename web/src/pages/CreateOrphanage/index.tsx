@@ -77,7 +77,7 @@ export default function CreateOrphanage(): JSX.Element {
 
       toast.success('Cadastro realizado com sucesso!');
 
-      history.push('/app');
+      history.push('/orphanages/create/success');
     } catch (e) {
       toast.error(e.response.data.message);
       console.log(e.response.data.errors);
