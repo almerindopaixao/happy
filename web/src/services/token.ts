@@ -11,5 +11,7 @@ export function setTokenLocalStorage(token: string): void {
 }
 
 export function setTokenSessionStorage(token: string): void {
-  window.localStorage.setItem('app-token', token);
+  window.sessionStorage.setItem('app-token', token);
 }
+
+export const token = getTokenLocalStorage() || getTokenSessionStorage();

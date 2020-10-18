@@ -12,3 +12,13 @@ body {
 body, input, button, textarea {
   font: 600 18px Nunito, sans-serif;
 }
+
+.toast-container .Toastify__toast--success {
+  background-color: #3CDC8C;
+  font-size: 16px;
+}
+
+.toast-container .Toastify__toast--error {
+  background-color: #FF669D;
+  font-size: 16px;
+}
