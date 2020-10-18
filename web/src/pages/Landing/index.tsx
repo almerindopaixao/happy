@@ -24,7 +24,7 @@ export default function Landing(): JSX.Element {
           <p>Visite orfanatos e mude o dia de muitas crianças.</p>
         </main>
 
-        <Link to="/login" className="login-app">
+        <Link to="/dashboard" className="login-app">
           Acesso restrito
         </Link>
 
