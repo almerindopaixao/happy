@@ -10,6 +10,8 @@ import 'dotenv/config';
 import './database/connection';
 
 import OrphanageRoutes from './routes/OrphanagesRoutes';
+import UsersRoutes from './routes/UsersRoutes';
+import TokenRoutes from './routes/TokenRoutes';
 import errorHandle from './errors/handler';
 
 class App {
@@ -34,6 +36,8 @@ class App {
 
   routes() {
     this.app.use('/orphanages', OrphanageRoutes);
+    this.app.use('/register', UsersRoutes);
+    this.app.use('/login', TokenRoutes);
   }
 }
 

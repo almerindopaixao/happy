@@ -3,4 +3,4 @@ node_modules
 dist
 yarn-error.log
 ormconfig.json
-uploads/images/*.png|jpg
+uploads/images/*.jpg
