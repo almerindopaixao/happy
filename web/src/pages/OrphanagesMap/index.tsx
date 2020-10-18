@@ -44,7 +44,9 @@ export default function OrphanagesMap(): JSX.Element {
     <div id="page-map">
       <aside>
         <header>
-          <img src={mapMarketImg} alt="appy" />
+          <Link to="/">
+            <img src={mapMarketImg} alt="appy" />
+          </Link>
 
           <h2>Escolha um orfanato no mapa</h2>
           <p>Muitas crianças estão esperando a sua visita</p>

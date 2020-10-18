@@ -6,6 +6,7 @@ import OrphanagesMap from '../pages/OrphanagesMap';
 import CreateOrphanage from '../pages/CreateOrphanage';
 import Orphanage from '../pages/Orphanage';
 import CreateOrphanageSuccess from '../pages/CreateOrphanageSuccess';
+import Login from '../pages/Login';
 
 export default function Routes(): JSX.Element {
   return (
@@ -19,6 +20,7 @@ export default function Routes(): JSX.Element {
           component={CreateOrphanageSuccess}
         />
         <Route path="/orphanages/:id" component={Orphanage} />
+        <Route exact path="/login" component={Login} />
       </Switch>
     </BrowserRouter>
   );
