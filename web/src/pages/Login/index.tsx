@@ -125,7 +125,7 @@ export default function Login(): JSX.Element {
                 Lembrar-me
               </label>
 
-              <Link to="/login/retrieve">Esqueci minha senha</Link>
+              <Link to="/forgot_password">Esqueci minha senha</Link>
             </div>
           </fieldset>
 

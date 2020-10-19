@@ -13,4 +13,10 @@ export default class UsersModel {
 
   @Column()
   password: string;
+
+  @Column({ default: 'token' })
+  passwordResetToken: string;
+
+  @Column({ default: new Date() })
+  passwordResetExpires: Date;
 }

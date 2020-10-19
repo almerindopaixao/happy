@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import TokenCOntroller from '../controllers/TokenController';
+import TokenController from '../controllers/TokenController';
 
 class TokenRoutes {
   public router: Router = Router();
@@ -10,7 +10,7 @@ class TokenRoutes {
   }
 
   routes() {
-    this.router.post('/', TokenCOntroller.store);
+    this.router.post('/', TokenController.store);
   }
 }
 

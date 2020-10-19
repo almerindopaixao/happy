@@ -7,17 +7,20 @@ import 'express-async-errors';
 import 'reflect-metadata';
 import 'dotenv/config';
 
-import './database/connection';
+import connection from './database/connection';
 
 import OrphanageRoutes from './routes/OrphanagesRoutes';
 import UsersRoutes from './routes/UsersRoutes';
 import TokenRoutes from './routes/TokenRoutes';
+import AuthenticateRoutes from './routes/AuthenticateRoutes';
+
 import errorHandle from './errors/handler';
 
 class App {
   public app = express();
 
   constructor() {
+    this.connectionDatabase();
     this.middlewares();
     this.routes();
   }
@@ -38,6 +41,20 @@ class App {
     this.app.use('/orphanages', OrphanageRoutes);
     this.app.use('/register', UsersRoutes);
     this.app.use('/login', TokenRoutes);
+    this.app.use('/forgot_password', AuthenticateRoutes);
+  }
+
+  async connectionDatabase() {
+    try {
+      await connection();
+
+      this.app.emit('ok');
+    } catch (e) {
+      console.error({
+        error: ['Não conseguimos acessar o banco de dados'],
+        solution: 'Porfavor, inicie o banco de dados',
+      });
+    }
   }
 }
 

@@ -6,7 +6,7 @@ import SidebarLogin from '../../components/SidebarLogin';
 
 import './styles.css';
 
-export default function RetrieveLogin(): JSX.Element {
+export default function ForgotPassword(): JSX.Element {
   return (
     <div id="page-login">
       <SidebarLogin />

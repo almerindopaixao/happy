@@ -41,6 +41,8 @@ class UsersController {
       const user = userRepository.create({
         ...data,
         password: password_hash,
+        passwordResetToken: 'token_default',
+        passwordResetExpires: new Date(),
       });
 
       await userRepository.save(user);
