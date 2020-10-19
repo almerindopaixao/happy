@@ -75,6 +75,10 @@ export default function whatsappNumberMask(number: string): string {
    }}
 />
 ```
+### :pushpin: >> Implementação da autentificação do usuário (login e senha) e criação da tela para redefiniar a senha:
+
+![Telas Login](https://github.com/almerindopaixao/happy/blob/main/.github/telasLogin.png)
+
 #### :pushpin: >> Implementação da validação de imagens (formato, tipo, tamanho) pela API utilizando o multer :ballot_box_with_check:
 ```typescript
 fileFilter: (req, file, cb) => {
